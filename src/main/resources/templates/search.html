@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/jquery.soap.js"></script>
+<script>
+  $(document).ready(function(){
+    $("p").click(function(){
+      $(this).hide();
+      $.soap({
+        url: 'http://localhost:8080/ws/',
+        method: 'GetStudentDetailsRequest',
+        namespaceURL: 'http://in28minutes.com/students',
+        data: {
+          id: '1'
+        },
+
+        success: function (soapResponse) {
+          // do stuff with soapResponse
+          // if you want to have the response as JSON use soapResponse.toJSON();
+          // or soapResponse.toString() to get XML string
+          // or soapResponse.toXML() to get XML DOM
+          console.log(soapResponse.toXML());
+          console.log(soapResponse.toJSON());
+        },
+        error: function (SOAPResponse) {
+          // show error
+          console.log(SOAPResponse);
+        }
+      });
+    });
+  });
+</script>
+<head>
+  <meta charset = "ISO-8859-1" />
+  <link href = "css/styles.css" rel = "stylesheet"/>
+  <title>Spring Boot Application</title>
+</head>
+<body>
+<h4>Welcome to Thymeleaf Spring Boot web application</h4>
+
+<p>If you click on me, I will disappear.</p>
+<p>Click me away!</p>
+<p>Click me too!</p>
+
+</body>
+</html>
